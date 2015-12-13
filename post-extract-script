@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e 
+
+TARGETDIR="/usr/share/man/man1"
+
+updatemandb() {
+  for i in ${TARGETDIR}/zsh*.1
+  do
+    mandb -q -f $i || return 1
+  done
+
+  return 0
+}
+
+if [[ ! -d $TARGETDIR ]]; then
+  echo -n "Creating target dir: ${TARGETDIR}... "
+  err=$(mkdir -p "${TARGETDIR}" 2>&1) && echo 'Done.' || echo "FAILED: $err"
+fi
+
+echo -n "Installing files... "
+err=$(install -m 644 zsh*.1 ${TARGETDIR} 2>&1) && echo 'Done.' || echo "FAILED: $err"
+
+echo -n "Updating mandb... "
+err=$(updatemandb 2>&1) && echo 'Done.' || echo "FAILED: $err"
+

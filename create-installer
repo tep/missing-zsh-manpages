@@ -1,0 +1,4 @@
+#!/bin/sh
+
+makeself --nox11 --noprogress --nowait . ./install-zsh-manual 'Missing Zsh Manual Pages' ./post-extract-script
+
