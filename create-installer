@@ -1,4 +1,15 @@
 #!/bin/sh
 
-makeself --nox11 --noprogress --nowait . ./install-zsh-manual 'Missing Zsh Manual Pages' ./post-extract-script
+SCRIPTDIR=$(dirname $(readlink -f $0))
+TMPDIR=$(mktemp -d)
+
+cp post-extract-script man/zsh*.1 ${TMPDIR}
+
+cd ${TMPDIR}
+
+makeself --nox11 --noprogress --nowait . \
+    $SCRIPTDIR/install-zsh-manual \
+    'Missing Zsh Manual Pages' \
+    ./post-extract-script
+
 
