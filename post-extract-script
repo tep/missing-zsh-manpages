@@ -2,8 +2,7 @@
 
 set -e 
 
-# TARGETDIR="/usr/share/man/man1"
-TARGETDIR="/tmp/usr/share/man/man1"
+TARGETDIR="/usr/share/man/man1"
 
 updatemandb() {
   for i in ${TARGETDIR}/zsh*.1
